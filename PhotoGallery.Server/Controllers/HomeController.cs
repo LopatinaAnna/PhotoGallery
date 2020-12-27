@@ -2,12 +2,10 @@
 
 namespace PhotoGallery.Server.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class HomeController : ControllerBase
+    public class HomeController : ApiController
     {
         //[Authorize]
-        public IActionResult Get()
+        public ActionResult Get()
         {
             return Ok("ok");
         }
