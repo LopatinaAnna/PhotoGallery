@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +8,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-loginForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+
+  loginForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+
     this.loginForm = this.fb.group({
       'username': ['', [Validators.required]],
       'password': ['', [Validators.required]]
@@ -19,7 +23,9 @@ loginForm: FormGroup;
   }
 
   login(){
-    console.log(this.loginForm.value);
+    this.authService.login(this.loginForm.value).subscribe(data => {
+      console.log(data);
+    })
   }
 
   get username(){
