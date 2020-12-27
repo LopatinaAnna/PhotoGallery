@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
-
     this.loginForm = this.fb.group({
       'username': ['', [Validators.required]],
       'password': ['', [Validators.required]]
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.authService.login(this.loginForm.value).subscribe(data => {
-      console.log(data);
+      this.authService.saveToken(data['token']);
     })
   }
 

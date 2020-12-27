@@ -43,7 +43,7 @@ namespace PhotoGallery.Server.Controllers
         }
 
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginModel model)
+        public async Task<ActionResult<object>> Login(LoginModel model)
         {
             var user = await userManager.FindByNameAsync(model.UserName);
 
@@ -61,6 +61,7 @@ namespace PhotoGallery.Server.Controllers
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -70,10 +71,11 @@ namespace PhotoGallery.Server.Controllers
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var encryptedToken = tokenHandler.WriteToken(token);
 
-            return encryptedToken;
+            return new { Token = encryptedToken };
         }
     }
 }
