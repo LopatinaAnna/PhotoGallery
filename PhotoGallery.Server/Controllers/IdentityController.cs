@@ -47,7 +47,7 @@ namespace PhotoGallery.Server.Controllers
         {
             var user = await userManager.FindByNameAsync(model.UserName);
 
-            if(user == null)
+            if (user == null)
             {
                 return Unauthorized();
             }

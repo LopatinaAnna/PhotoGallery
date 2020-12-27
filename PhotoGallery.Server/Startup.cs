@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PhotoGallery.Server.Data;
 using PhotoGallery.Server.Data.Models;
+using PhotoGallery.Server.Infrastructure;
 using System.Text;
 
 namespace PhotoGallery.Server
@@ -91,6 +92,8 @@ namespace PhotoGallery.Server
             {
                 endpoints.MapControllers();
             });
+
+            app.ApplayMigration();
         }
     }
 }

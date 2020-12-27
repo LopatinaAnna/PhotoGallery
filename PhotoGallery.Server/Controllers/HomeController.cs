@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PhotoGallery.Server.Controllers
 {
     public class HomeController : ApiController
     {
-        //[Authorize]
+        [Authorize]
         public ActionResult Get()
         {
             return Ok("ok");
