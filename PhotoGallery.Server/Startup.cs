@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PhotoGallery.Server.Data;
 using PhotoGallery.Server.Infrastructure;
 
 namespace PhotoGallery.Server
@@ -21,10 +19,10 @@ namespace PhotoGallery.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddDbContext<ApplicationDbContext>(options => options
-                    .UseSqlServer(Configuration.GetDefaultConnectionString()))
+                .AddDatabase(Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetAppSettings(Configuration))
+                .AddApplicationServices()
                 .AddControllers();
         }
 

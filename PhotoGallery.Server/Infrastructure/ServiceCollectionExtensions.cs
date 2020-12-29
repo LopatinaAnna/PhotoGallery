@@ -1,15 +1,38 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PhotoGallery.Server.Data;
 using PhotoGallery.Server.Data.Models;
+using PhotoGallery.Server.Features.Identity;
+using PhotoGallery.Server.Features.Photos;
 using System.Text;
 
 namespace PhotoGallery.Server.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
+        public static IServiceCollection AddDatabase(
+            this IServiceCollection services, 
+            IConfiguration configuration)
+        {
+            return services
+                .AddDbContext<ApplicationDbContext>(options => options
+                    .UseSqlServer(configuration.GetDefaultConnectionString()));
+        }
+
+        public static AppSettings GetAppSettings(
+            this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            var appSettingsSection = configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            return appSettingsSection.Get<AppSettings>();
+        }
+
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services
@@ -51,6 +74,13 @@ namespace PhotoGallery.Server.Infrastructure
             });
 
             return services;
+        }
+
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            return services
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<IPhotoService, PhotoService>();
         }
     }
 }
