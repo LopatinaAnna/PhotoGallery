@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PhotoGallery.Server.Data.Models.Identity
+namespace PhotoGallery.Server.Features.Identity
 {
     public class LoginRequestModel
     {

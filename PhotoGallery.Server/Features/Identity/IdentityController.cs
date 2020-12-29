@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using PhotoGallery.Server.Data.Models;
-using PhotoGallery.Server.Data.Models.Identity;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PhotoGallery.Server.Features.Identity
@@ -15,11 +9,16 @@ namespace PhotoGallery.Server.Features.Identity
     public class IdentityController : ApiController
     {
         private readonly UserManager<User> userManager;
+        private readonly IIdentityService identityService;
         private readonly AppSettings appSettings;
 
-        public IdentityController(UserManager<User> userManager, IOptions<AppSettings> appSettings)
+        public IdentityController(
+            UserManager<User> userManager, 
+            IIdentityService identityService,
+            IOptions<AppSettings> appSettings)
         {
             this.userManager = userManager;
+            this.identityService = identityService;
             this.appSettings = appSettings.Value;
         }
 
@@ -33,7 +32,6 @@ namespace PhotoGallery.Server.Features.Identity
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
-
             if (result.Succeeded)
             {
                 return Ok();
@@ -43,40 +41,23 @@ namespace PhotoGallery.Server.Features.Identity
         }
 
         [Route(nameof(Login))]
-        public async Task<ActionResult<object>> Login(LoginRequestModel model)
+        public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel model)
         {
             var user = await userManager.FindByNameAsync(model.UserName);
-
             if (user == null)
             {
                 return Unauthorized();
             }
 
             var passwordValidate = await userManager.CheckPasswordAsync(user, model.Password);
-
             if (!passwordValidate)
             {
                 return Unauthorized();
             }
+            
+            var token = identityService.GenerateJwtToken(user.Id, user.UserName, appSettings.Secret);
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Name, user.UserName)
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var encryptedToken = tokenHandler.WriteToken(token);
-
-            return new { Token = encryptedToken };
+            return new LoginResponseModel { Token = token };
         }
     }
 }
