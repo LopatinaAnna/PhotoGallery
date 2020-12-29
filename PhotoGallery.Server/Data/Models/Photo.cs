@@ -9,7 +9,7 @@ namespace PhotoGallery.Server.Data.Models
 
         [Required]
         [MaxLength(MaxDescriptionLength)]
-        public string  Description { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public string ImageUrl { get; set; }

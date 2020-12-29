@@ -5,7 +5,6 @@ namespace PhotoGallery.Models.Photos
 {
     public class CreatePhotoModel
     {
-        [Required]
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
