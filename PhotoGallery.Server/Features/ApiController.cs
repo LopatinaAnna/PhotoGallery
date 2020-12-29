@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PhotoGallery.Server.Controllers
+namespace PhotoGallery.Server.Features
 {
     [ApiController]
     [Route("[controller]")]

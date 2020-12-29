@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static PhotoGallery.Server.Data.Validation.Photo;
 
-namespace PhotoGallery.Models.Photos
+namespace PhotoGallery.Server.Features.Photos
 {
-    public class CreatePhotoModel
+    public class CreatePhotoRequestModel
     {
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }

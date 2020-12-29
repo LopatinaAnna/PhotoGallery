@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PhotoGallery.Models.Photos;
 using PhotoGallery.Server.Data;
 using PhotoGallery.Server.Data.Models;
 using PhotoGallery.Server.Infrastructure;
 using System.Threading.Tasks;
 
-namespace PhotoGallery.Server.Controllers
+namespace PhotoGallery.Server.Features.Photos
 {
     public class PhotosController : ApiController
     {
@@ -19,7 +18,7 @@ namespace PhotoGallery.Server.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<int>> Create(CreatePhotoModel model)
+        public async Task<ActionResult<int>> Create(CreatePhotoRequestModel model)
         {
             var userName = User.Identity.Name;
             var userId = User.GetId();

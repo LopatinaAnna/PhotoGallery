@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhotoGallery.Server.Controllers
+namespace PhotoGallery.Server.Features.Identity
 {
     public class IdentityController : ApiController
     {
@@ -24,7 +24,7 @@ namespace PhotoGallery.Server.Controllers
         }
 
         [Route(nameof(Register))]
-        public async Task<ActionResult> Register(RegisterModel model)
+        public async Task<ActionResult> Register(RegisterRequestModel model)
         {
             var user = new User
             {
@@ -43,7 +43,7 @@ namespace PhotoGallery.Server.Controllers
         }
 
         [Route(nameof(Login))]
-        public async Task<ActionResult<object>> Login(LoginModel model)
+        public async Task<ActionResult<object>> Login(LoginRequestModel model)
         {
             var user = await userManager.FindByNameAsync(model.UserName);
 
