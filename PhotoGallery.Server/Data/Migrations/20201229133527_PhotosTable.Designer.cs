@@ -10,7 +10,7 @@ using PhotoGallery.Server.Data;
 namespace PhotoGallery.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201229114126_PhotosTable")]
+    [Migration("20201229133527_PhotosTable")]
     partial class PhotosTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,7 +176,7 @@ namespace PhotoGallery.Server.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Photo");
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("PhotoGallery.Server.Data.Models.User", b =>

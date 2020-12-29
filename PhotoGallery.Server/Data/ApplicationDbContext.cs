@@ -11,6 +11,8 @@ namespace PhotoGallery.Server.Data
         {
         }
 
+        public DbSet<Photo> Photos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Photo>().HasOne(x => x.User).WithMany(x => x.Photos).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);

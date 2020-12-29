@@ -174,7 +174,7 @@ namespace PhotoGallery.Server.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Photo");
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("PhotoGallery.Server.Data.Models.User", b =>
