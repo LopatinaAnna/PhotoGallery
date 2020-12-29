@@ -10,5 +10,12 @@ namespace PhotoGallery.Server.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Photo>().HasOne(x => x.User).WithMany(x => x.Photos).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
+        }
     }
 }
