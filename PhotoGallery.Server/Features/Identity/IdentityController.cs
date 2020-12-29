@@ -22,6 +22,7 @@ namespace PhotoGallery.Server.Features.Identity
             this.appSettings = appSettings.Value;
         }
 
+        [HttpPost]
         [Route(nameof(Register))]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
@@ -40,6 +41,7 @@ namespace PhotoGallery.Server.Features.Identity
             return BadRequest(result.Errors);
         }
 
+        [HttpPost]
         [Route(nameof(Login))]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel model)
         {

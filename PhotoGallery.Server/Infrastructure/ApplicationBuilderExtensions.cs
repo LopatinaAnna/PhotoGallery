@@ -7,6 +7,16 @@ namespace PhotoGallery.Server.Infrastructure
 {
     public static class ApplicationBuilderExtensions
     {
+        public static IApplicationBuilder UseSwaggerUI(this IApplicationBuilder app)
+        {
+            return app.UseSwagger()
+                .UseSwaggerUI(option =>
+                {
+                    option.SwaggerEndpoint("/swagger/v1/swagger.json", "PhotoGallery API");
+                    option.RoutePrefix = string.Empty;
+                }); 
+        }
+
         public static void ApplayMigration(this IApplicationBuilder app)
         {
             using var services = app.ApplicationServices.CreateScope();

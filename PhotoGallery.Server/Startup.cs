@@ -23,6 +23,7 @@ namespace PhotoGallery.Server
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetAppSettings(Configuration))
                 .AddApplicationServices()
+                .AddSwagger()
                 .AddControllers();
         }
 
@@ -34,6 +35,7 @@ namespace PhotoGallery.Server
             }
 
             app
+                .UseSwaggerUI()
                 .UseRouting()
                 .UseCors(option => option
                     .AllowAnyOrigin()
@@ -43,6 +45,6 @@ namespace PhotoGallery.Server
                 .UseAuthorization()
                 .UseEndpoints(endpoints => endpoints.MapControllers())
                 .ApplayMigration();
-        }
     }
+}
 }

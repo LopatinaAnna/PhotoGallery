@@ -82,5 +82,18 @@ namespace PhotoGallery.Server.Infrastructure
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<IPhotoService, PhotoService>();
         }
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        {
+            return services.AddSwaggerGen(c => 
+                c.SwaggerDoc(
+                    "v1", 
+                    new Microsoft.OpenApi.Models.OpenApiInfo 
+                    { 
+                        Title = "PhotoGallery API", 
+                        Version = "v1" 
+                    }));
+                  
+        }
     }
 }
