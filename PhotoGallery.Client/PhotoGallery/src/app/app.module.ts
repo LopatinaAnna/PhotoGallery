@@ -8,20 +8,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CreatepostComponent } from './createpost/createpost.component';
+import { PhotoService } from './services/photo.service';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     LoginComponent,
-    RegisterComponent
-  ],
+    RegisterComponent,
+      CreatepostComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, PhotoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
