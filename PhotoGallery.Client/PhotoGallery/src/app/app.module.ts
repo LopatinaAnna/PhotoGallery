@@ -10,6 +10,7 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatepostComponent } from './createpost/createpost.component';
 import { PhotoService } from './services/photo.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [	
@@ -24,7 +25,7 @@ import { PhotoService } from './services/photo.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, PhotoService],
+  providers: [AuthService, PhotoService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
