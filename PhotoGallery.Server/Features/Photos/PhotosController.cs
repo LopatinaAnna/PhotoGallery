@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhotoGallery.Server.Infrastructure;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PhotoGallery.Server.Features.Photos
@@ -12,6 +13,13 @@ namespace PhotoGallery.Server.Features.Photos
         public PhotosController(IPhotoService photoService)
         {
             this.photoService = photoService;
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IEnumerable<PhotoListResponseModel>> Get()
+        {
+            return await photoService.GetPhotos(User.GetId());
         }
 
         [Authorize]

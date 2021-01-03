@@ -1,5 +1,8 @@
-﻿using PhotoGallery.Server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PhotoGallery.Server.Data;
 using PhotoGallery.Server.Data.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhotoGallery.Server.Features.Photos
@@ -27,6 +30,19 @@ namespace PhotoGallery.Server.Features.Photos
             await data.SaveChangesAsync();
 
             return photo.Id;
+        }
+
+        public async Task<IEnumerable<PhotoListResponseModel>> GetPhotos(string userId)
+        {
+            return await data
+                .Photos
+                .Where(c => c.UserId == userId)
+                .Select(c => new PhotoListResponseModel 
+                { 
+                    Id = c.Id, 
+                    ImageUrl = c.ImageUrl 
+                })
+                .ToListAsync();
         }
     }
 }
