@@ -11,12 +11,9 @@ import { AuthService } from './auth.service';
 export class PhotoService {
     private  photoPath = environment.apiUrl + '/photos'
 
-    constructor(private http: HttpClient, private authService: AuthService) { }
+    constructor(private http: HttpClient) { }
 
     create(data: Photo): Observable<Photo>{
-        let headers = new HttpHeaders();
-        headers = headers.set('Authorization', `Bearer ${this.authService.getToken()}`);
-
-        return this.http.post<Photo>(this.photoPath, data, {headers});
+        return this.http.post<Photo>(this.photoPath, data);
     }
 }
