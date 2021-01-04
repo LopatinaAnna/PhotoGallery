@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PhotoGallery.Server.Infrastructure;
+using PhotoGallery.Server.Infrastructure.Extensions;
 
 namespace PhotoGallery.Server
 {
@@ -24,7 +24,7 @@ namespace PhotoGallery.Server
                 .AddJwtAuthentication(services.GetAppSettings(Configuration))
                 .AddApplicationServices()
                 .AddSwagger()
-                .AddControllers();
+                .AddApiControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -8,9 +8,10 @@ using PhotoGallery.Server.Data;
 using PhotoGallery.Server.Data.Models;
 using PhotoGallery.Server.Features.Identity;
 using PhotoGallery.Server.Features.Photos;
+using PhotoGallery.Server.Infrastructure.Filters;
 using System.Text;
 
-namespace PhotoGallery.Server.Infrastructure
+namespace PhotoGallery.Server.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -93,7 +94,12 @@ namespace PhotoGallery.Server.Infrastructure
                         Title = "PhotoGallery API", 
                         Version = "v1" 
                     }));
-                  
+
+        }
+
+        public static void AddApiControllers(this IServiceCollection services)
+        {
+            services.AddControllers(options => options.Filters.Add<ModelOrNotFoundFilter>());
         }
     }
 }

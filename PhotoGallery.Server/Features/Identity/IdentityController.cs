@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using PhotoGallery.Server.Data.Models;
+using PhotoGallery.Server.Features.Identity.Models;
 using System.Threading.Tasks;
 
 namespace PhotoGallery.Server.Features.Identity

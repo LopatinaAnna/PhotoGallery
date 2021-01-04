@@ -1,4 +1,4 @@
-﻿namespace PhotoGallery.Server.Features.Identity
+﻿namespace PhotoGallery.Server.Features.Identity.Models
 {
     public class LoginResponseModel
     {

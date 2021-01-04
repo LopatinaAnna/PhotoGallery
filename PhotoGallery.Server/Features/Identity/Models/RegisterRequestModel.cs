@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PhotoGallery.Server.Features.Identity
+namespace PhotoGallery.Server.Features.Identity.Models
 {
     public class RegisterRequestModel
     {

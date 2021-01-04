@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PhotoGallery.Server.Data;
 
-namespace PhotoGallery.Server.Infrastructure
+namespace PhotoGallery.Server.Infrastructure.Extensions
 {
     public static class ApplicationBuilderExtensions
     {

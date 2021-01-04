@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace PhotoGallery.Server.Infrastructure
+namespace PhotoGallery.Server.Infrastructure.Extensions
 {
     public static class ConfigurationExtention
     {

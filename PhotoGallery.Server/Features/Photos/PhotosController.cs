@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PhotoGallery.Server.Infrastructure;
+using PhotoGallery.Server.Features.Photos.Models;
+using PhotoGallery.Server.Infrastructure.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PhotoGallery.Server.Features.Photos
 {
+    [Authorize]
     public class PhotosController : ApiController
     {
         private readonly IPhotoService photoService;
@@ -15,14 +17,19 @@ namespace PhotoGallery.Server.Features.Photos
             this.photoService = photoService;
         }
 
-        [Authorize]
         [HttpGet]
-        public async Task<IEnumerable<PhotoListResponseModel>> Get()
+        public async Task<IEnumerable<PhotoListModel>> Get()
         {
             return await photoService.GetPhotos(User.GetId());
         }
 
-        [Authorize]
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<PhotoDetailsModel>> Details(int id)
+        {
+            return await photoService.GetDetails(id);
+        }
+
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreatePhotoRequestModel model)
         {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 
-namespace PhotoGallery.Server.Infrastructure
+namespace PhotoGallery.Server.Infrastructure.Extensions
 {
     public static class IdentityExtensions
     {

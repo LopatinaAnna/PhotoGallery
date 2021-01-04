@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhotoGallery.Server.Data;
 using PhotoGallery.Server.Data.Models;
+using PhotoGallery.Server.Features.Photos.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,12 +33,29 @@ namespace PhotoGallery.Server.Features.Photos
             return photo.Id;
         }
 
-        public async Task<IEnumerable<PhotoListResponseModel>> GetPhotos(string userId)
+        public async Task<PhotoDetailsModel> GetDetails(int photoId)
+        {
+            return await data
+                .Photos
+                .Where(c => c.Id == photoId)
+                .Select(c => new PhotoDetailsModel
+                {
+                    Id = c.Id,
+                    Description = c.Description,
+                    ImageUrl = c.ImageUrl,
+                    UserId = c.UserId,
+                    UserName = c.UserId
+
+                })
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<PhotoListModel>> GetPhotos(string userId)
         {
             return await data
                 .Photos
                 .Where(c => c.UserId == userId)
-                .Select(c => new PhotoListResponseModel 
+                .Select(c => new PhotoListModel 
                 { 
                     Id = c.Id, 
                     ImageUrl = c.ImageUrl 
