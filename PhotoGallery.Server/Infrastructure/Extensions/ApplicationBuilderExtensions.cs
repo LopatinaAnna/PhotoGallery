@@ -14,7 +14,7 @@ namespace PhotoGallery.Server.Infrastructure.Extensions
                 {
                     option.SwaggerEndpoint("/swagger/v1/swagger.json", "PhotoGallery API");
                     option.RoutePrefix = string.Empty;
-                }); 
+                });
         }
 
         public static void ApplayMigration(this IApplicationBuilder app)

@@ -16,7 +16,7 @@ namespace PhotoGallery.Server.Infrastructure.Extensions
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddDatabase(
-            this IServiceCollection services, 
+            this IServiceCollection services,
             IConfiguration configuration)
         {
             return services
@@ -86,15 +86,14 @@ namespace PhotoGallery.Server.Infrastructure.Extensions
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
-            return services.AddSwaggerGen(c => 
+            return services.AddSwaggerGen(c =>
                 c.SwaggerDoc(
-                    "v1", 
-                    new Microsoft.OpenApi.Models.OpenApiInfo 
-                    { 
-                        Title = "PhotoGallery API", 
-                        Version = "v1" 
+                    "v1",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "PhotoGallery API",
+                        Version = "v1"
                     }));
-
         }
 
         public static void AddApiControllers(this IServiceCollection services)

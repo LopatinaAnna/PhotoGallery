@@ -35,7 +35,10 @@ namespace PhotoGallery.Server.Features.Photos
         {
             var userId = User.GetId();
 
-            var id = await photoService.Create(model.Description, model.ImageUrl, userId);
+            var id = await photoService.Create(
+                model.Description,
+                model.ImageUrl,
+                userId);
 
             return Created(nameof(Create), id);
         }
@@ -50,7 +53,7 @@ namespace PhotoGallery.Server.Features.Photos
                 model.Description,
                 userId);
 
-            if(!updated)
+            if (!updated)
             {
                 return BadRequest();
             }
@@ -58,5 +61,20 @@ namespace PhotoGallery.Server.Features.Photos
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var userId = User.GetId();
+
+            var deleted = await photoService.Delete(id, userId);
+
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }

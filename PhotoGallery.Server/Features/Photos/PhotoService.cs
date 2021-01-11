@@ -33,9 +33,24 @@ namespace PhotoGallery.Server.Features.Photos
             return photo.Id;
         }
 
-        public async Task<PhotoDetailsModel> GetDetails(int photoId)
+        public async Task<bool> Delete(int id, string userId)
         {
-            return await data.Photos
+            var photo = await GetPhoto(id, userId);
+
+            if (photo == null)
+            {
+                return false;
+            }
+
+            data.Photos.Remove(photo);
+
+            await data.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<PhotoDetailsModel> GetDetails(int photoId)
+        => await data.Photos
                 .Where(c => c.Id == photoId)
                 .Select(c => new PhotoDetailsModel
                 {
@@ -44,30 +59,24 @@ namespace PhotoGallery.Server.Features.Photos
                     ImageUrl = c.ImageUrl,
                     UserId = c.UserId,
                     UserName = c.UserId
-
                 })
                 .FirstOrDefaultAsync();
-        }
 
         public async Task<IEnumerable<PhotoListModel>> GetPhotos(string userId)
-        {
-            return await data.Photos
+        => await data.Photos
                 .Where(c => c.UserId == userId)
-                .Select(c => new PhotoListModel 
-                { 
-                    Id = c.Id, 
-                    ImageUrl = c.ImageUrl 
+                .Select(c => new PhotoListModel
+                {
+                    Id = c.Id,
+                    ImageUrl = c.ImageUrl
                 })
                 .ToListAsync();
-        }
 
         public async Task<bool> Update(int id, string description, string userId)
         {
-            var photo = await data.Photos
-                .Where(c => c.Id == id && c.UserId == userId)
-                .FirstOrDefaultAsync();
+            var photo = await GetPhoto(id, userId);
 
-            if(photo == null)
+            if (photo == null)
             {
                 return false;
             }
@@ -78,5 +87,10 @@ namespace PhotoGallery.Server.Features.Photos
 
             return true;
         }
+
+        private async Task<Photo> GetPhoto(int id, string userId)
+            => await data.Photos
+                .Where(c => c.Id == id && c.UserId == userId)
+                .FirstOrDefaultAsync();
     }
 }

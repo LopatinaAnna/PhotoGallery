@@ -5,7 +5,7 @@ namespace PhotoGallery.Server.Features.Photos.Models
 {
     public class UpdatePhotoRequestModel
     {
-        public int Id{ get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(MaxDescriptionLength)]

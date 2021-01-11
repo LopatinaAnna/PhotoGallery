@@ -45,6 +45,6 @@ namespace PhotoGallery.Server
                 .UseAuthorization()
                 .UseEndpoints(endpoints => endpoints.MapControllers())
                 .ApplayMigration();
+        }
     }
-}
 }

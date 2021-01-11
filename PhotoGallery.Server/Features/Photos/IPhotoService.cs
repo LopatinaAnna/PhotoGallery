@@ -13,5 +13,7 @@ namespace PhotoGallery.Server.Features.Photos
         public Task<PhotoDetailsModel> GetDetails(int photoId);
 
         public Task<bool> Update(int id, string description, string userId);
+
+        public Task<bool> Delete(int id, string userId);
     }
 }

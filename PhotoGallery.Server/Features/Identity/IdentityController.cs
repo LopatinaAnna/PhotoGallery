@@ -14,7 +14,7 @@ namespace PhotoGallery.Server.Features.Identity
         private readonly AppSettings appSettings;
 
         public IdentityController(
-            UserManager<User> userManager, 
+            UserManager<User> userManager,
             IIdentityService identityService,
             IOptions<AppSettings> appSettings)
         {
@@ -57,7 +57,7 @@ namespace PhotoGallery.Server.Features.Identity
             {
                 return Unauthorized();
             }
-            
+
             var token = identityService.GenerateJwtToken(user.Id, user.UserName, appSettings.Secret);
 
             return new LoginResponseModel { Token = token };
