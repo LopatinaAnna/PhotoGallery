@@ -39,5 +39,24 @@ namespace PhotoGallery.Server.Features.Photos
 
             return Created(nameof(Create), id);
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Update(UpdatePhotoRequestModel model)
+        {
+            var userId = User.GetId();
+
+            var updated = await photoService.Update(
+                model.Id,
+                model.Description,
+                userId);
+
+            if(!updated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
     }
 }

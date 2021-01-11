@@ -35,8 +35,7 @@ namespace PhotoGallery.Server.Features.Photos
 
         public async Task<PhotoDetailsModel> GetDetails(int photoId)
         {
-            return await data
-                .Photos
+            return await data.Photos
                 .Where(c => c.Id == photoId)
                 .Select(c => new PhotoDetailsModel
                 {
@@ -52,8 +51,7 @@ namespace PhotoGallery.Server.Features.Photos
 
         public async Task<IEnumerable<PhotoListModel>> GetPhotos(string userId)
         {
-            return await data
-                .Photos
+            return await data.Photos
                 .Where(c => c.UserId == userId)
                 .Select(c => new PhotoListModel 
                 { 
@@ -61,6 +59,24 @@ namespace PhotoGallery.Server.Features.Photos
                     ImageUrl = c.ImageUrl 
                 })
                 .ToListAsync();
+        }
+
+        public async Task<bool> Update(int id, string description, string userId)
+        {
+            var photo = await data.Photos
+                .Where(c => c.Id == id && c.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if(photo == null)
+            {
+                return false;
+            }
+
+            photo.Description = description;
+
+            await data.SaveChangesAsync();
+
+            return true;
         }
     }
 }
