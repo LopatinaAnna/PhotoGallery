@@ -16,4 +16,8 @@ export class PhotoService {
     create(data: Photo): Observable<Photo>{
         return this.http.post<Photo>(this.photoPath, data);
     }
+
+    getPhotos(): Observable<Array<Photo>>{
+        return this.http.get<Array<Photo>>(this.photoPath);
+    }
 }

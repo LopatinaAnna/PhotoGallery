@@ -50,7 +50,7 @@ namespace PhotoGallery.Server.Features.Photos
         }
 
         public async Task<PhotoDetailsModel> GetDetails(int photoId)
-        => await data.Photos
+            => await data.Photos
                 .Where(c => c.Id == photoId)
                 .Select(c => new PhotoDetailsModel
                 {
@@ -63,7 +63,7 @@ namespace PhotoGallery.Server.Features.Photos
                 .FirstOrDefaultAsync();
 
         public async Task<IEnumerable<PhotoListModel>> GetPhotos(string userId)
-        => await data.Photos
+            => await data.Photos
                 .Where(c => c.UserId == userId)
                 .Select(c => new PhotoListModel
                 {
