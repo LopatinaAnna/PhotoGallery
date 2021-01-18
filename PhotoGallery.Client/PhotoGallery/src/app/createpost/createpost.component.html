@@ -1,22 +1,13 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
-            <form [formGroup]="createPhotoForm" (ngSubmit)="create()">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Image URL</label>
-                    <input type="text" class="form-control" formControlName="ImageUrl">
-                </div>
-                <div *ngIf="imageUrl?.touched && imageUrl?.errors?.required" class="alert alert-danger">
-                    This field is required!
-                </div>
-                <div class="mb-3">
-                    <label for="textArea" class="form-label">Description</label>
-                    <textarea class="form-control" id="textArea" formControlName="Description" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form>
+<main class="form-signin text-center position-absolute top-50 start-50 translate-middle">
+    <h4 class="fw-light">ADD NEW PHOTO</h4>
+    <form [formGroup]="createPhotoForm" (ngSubmit)="create()">
+        <label for="inputUrl" class="visually-hidden">Image URL</label>
+        <input type="text" id="inputUrl" class="form-control" formControlName="ImageUrl" placeholder="Image URL" required>
+        <div *ngIf="imageUrl?.touched && imageUrl?.errors?.required" class="alert alert-danger">
+            This field is required!
         </div>
-        <div class="col-lg-4"></div>
-    </div>
-</div>
+        <label for="inputDescription" class="visually-hidden">Description</label>
+        <textarea id="inputDescription" class="form-control" formControlName="Description" placeholder="Description" rows="3" required></textarea>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Create</button>
+    </form>
+</main>
