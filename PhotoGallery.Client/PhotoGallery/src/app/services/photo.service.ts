@@ -24,4 +24,8 @@ export class PhotoService {
     getPhoto(id: number): Observable<Photo>{
         return this.http.get<Photo>(this.photoPath + '/' + id)
     }
+
+    deletePhoto(id: number){
+        return this.http.delete(this.photoPath + '/' + id);
+    }
 }

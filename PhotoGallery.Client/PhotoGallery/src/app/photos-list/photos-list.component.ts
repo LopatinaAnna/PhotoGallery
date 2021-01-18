@@ -16,8 +16,18 @@ export class PhotosListComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.fetchPhotos();
+  }
+
+  fetchPhotos(){
     this.photoService.getPhotos().subscribe(photos => {
       this.photos = photos;
+    })
+  }
+
+  deletePhoto(id: number){
+    this.photoService.deletePhoto(id).subscribe(res => {
+      this.fetchPhotos();
     })
   }
 }
