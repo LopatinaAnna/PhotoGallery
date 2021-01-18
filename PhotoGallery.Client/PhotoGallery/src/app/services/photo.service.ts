@@ -25,6 +25,10 @@ export class PhotoService {
         return this.http.get<Photo>(this.photoPath + '/' + id)
     }
 
+    editPhoto(data){
+        return this.http.put(this.photoPath, data);
+    }
+
     deletePhoto(id: number){
         return this.http.delete(this.photoPath + '/' + id);
     }

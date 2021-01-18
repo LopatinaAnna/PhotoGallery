@@ -1,9 +1,15 @@
 <div class="container-fluid">
     <div class="row">
-        <img [src]="photo.imageUrl">
-    </div>
-    <div class="row">
-        <h3>User: {{photo.userName}}</h3>
-        <h5>Description: {{photo.description}}</h5>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="row">
+                <h3>User: {{photo.userName}}</h3>
+                <h5>Description: {{photo.description}}</h5>
+            </div>
+            <div class="row">
+                <img [src]="photo.imageUrl">
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
     </div>
 </div>

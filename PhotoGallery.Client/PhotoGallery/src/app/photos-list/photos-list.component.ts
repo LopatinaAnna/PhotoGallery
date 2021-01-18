@@ -25,6 +25,10 @@ export class PhotosListComponent implements OnInit {
     })
   }
 
+  editPhoto(id: number){
+    this.router.navigate(["photos/" + id + "/edit"]);
+  }
+
   deletePhoto(id: number){
     this.photoService.deletePhoto(id).subscribe(res => {
       this.fetchPhotos();
