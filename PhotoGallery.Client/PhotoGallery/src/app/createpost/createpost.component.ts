@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PhotoService } from '../services/photo.service';
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-createpost',
@@ -10,7 +11,7 @@ import { PhotoService } from '../services/photo.service';
 export class CreatepostComponent{
   createPhotoForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private photoService: PhotoService) { 
+  constructor(private fb: FormBuilder, private photoService: PhotoService, private toastrService: ToastrService) { 
     this.createPhotoForm = fb.group({
       'ImageUrl': ['', Validators.required],
       'Description': ['']
@@ -19,7 +20,7 @@ export class CreatepostComponent{
 
   create(){
     this.photoService.create(this.createPhotoForm.value).subscribe(res=>{
-      console.log(res);
+      this.toastrService.success("Success");
     })
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Photo } from '../models/Photo';
 import { PhotoService } from '../services/photo.service';
 
@@ -17,7 +18,8 @@ export class PhotoEditComponent implements OnInit {
   constructor(private fb: FormBuilder, 
     private route: ActivatedRoute, 
     private photoService: PhotoService,
-    private router: Router) { 
+    private router: Router, 
+    private toastrService: ToastrService) { 
       this.editPhotoForm = this.fb.group({
         'id': [''],
         'description': ['']
@@ -40,6 +42,7 @@ export class PhotoEditComponent implements OnInit {
   editPhoto(){
     this.photoService.editPhoto(this.editPhotoForm.value).subscribe(res => {
       this.router.navigate(["photos"]);
+      this.toastrService.info("The photo " + this.editPhotoForm.value['id'] + " has been edited.");
     });
   }
 }

@@ -16,6 +16,8 @@ import { PhotosListComponent } from './photos-list/photos-list.component';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 import { PhotoEditComponent } from './photo-edit/photo-edit.component';
 import { ErrorInterceptorService } from './services/error-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ToastrModule } from 'ngx-toastr' 
 
 @NgModule({
   declarations: [				
@@ -31,7 +33,9 @@ import { ErrorInterceptorService } from './services/error-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthService, 
