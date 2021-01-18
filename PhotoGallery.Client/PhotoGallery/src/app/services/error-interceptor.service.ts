@@ -15,11 +15,11 @@ intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<an
         catchError(error => {
             let message = "";
             if(error.status === 401){
-                message = 'Token has expires or you should be logged in.';
+                message = 'Error 401 - Unauthorized';
             }else if (error.status === 404){
-                message = "Error 404";
+                message = "Error 404 - Not Found";
             }else if(error.status === 400){
-                message = "Error 400";
+                message = "Error 400 - Bad Request";
             }
             else{
                 message = "Unexpected error.";
