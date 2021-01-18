@@ -20,4 +20,8 @@ export class PhotoService {
     getPhotos(): Observable<Array<Photo>>{
         return this.http.get<Array<Photo>>(this.photoPath);
     }
+
+    getPhoto(id: number): Observable<Photo>{
+        return this.http.get<Photo>(this.photoPath + '/' + id)
+    }
 }

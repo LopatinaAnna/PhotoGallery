@@ -13,14 +13,16 @@ import { PhotoService } from './services/photo.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { PhotosListComponent } from './photos-list/photos-list.component';
+import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
     LoginComponent,
     RegisterComponent,
       CreatepostComponent,
-      PhotosListComponent
+      PhotosListComponent,
+      PhotoDetailsComponent
    ],
   imports: [
     BrowserModule,

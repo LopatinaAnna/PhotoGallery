@@ -58,7 +58,7 @@ namespace PhotoGallery.Server.Features.Photos
                     Description = c.Description,
                     ImageUrl = c.ImageUrl,
                     UserId = c.UserId,
-                    UserName = c.UserId
+                    UserName = c.User.UserName
                 })
                 .FirstOrDefaultAsync();
 
