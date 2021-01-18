@@ -15,6 +15,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { PhotosListComponent } from './photos-list/photos-list.component';
 import { PhotoDetailsComponent } from './photo-details/photo-details.component';
 import { PhotoEditComponent } from './photo-edit/photo-edit.component';
+import { ErrorInterceptorService } from './services/error-interceptor.service';
 
 @NgModule({
   declarations: [				
@@ -39,6 +40,11 @@ import { PhotoEditComponent } from './photo-edit/photo-edit.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
       multi: true
     }
   ],
