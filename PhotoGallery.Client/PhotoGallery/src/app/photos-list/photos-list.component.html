@@ -1,17 +1,29 @@
-<div class="container-fluid">
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4  row-cols-xl-5 g-4">
-        <div class="col" *ngFor="let photo of photos">
-            <div class="card text-center h-100">
-                <img [src]="photo.imageUrl" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">{{photo.id}}</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <div class="d-flex justify-content-around">
-                        <a routerLink="/photos/{{photo.id}}" class="btn btn-primary">Details</a>
-                        <button class="btn btn-warning" (click)="editPhoto(photo.id)">Edit</button>
-                        <button class="btn btn-danger" (click)="deletePhoto(photo.id)">Delete</button>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">PHOTO GALLERY</h1>
+            <p class="lead text-muted">Something short and leading about the collection below — its contents or the creator.</p>
+        </div>
+    </div>
+</section>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <br/>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col" *ngFor="let photo of photos">
+                <div class="card shadow-sm">
+                    <img [src]="photo.imageUrl" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Title {{photo.id}}</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="editPhoto(photo.id)">Edit</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" (click)="deletePhoto(photo.id)">Delete</button>
+                            </div>
+                            <a type="button" class="btn btn-sm btn-outline-primary" routerLink="/photos/{{photo.id}}">Details</a>
+                        </div>
                     </div>
                 </div>
             </div>
