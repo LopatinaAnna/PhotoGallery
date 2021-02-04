@@ -65,6 +65,7 @@ namespace PhotoGallery.Server.Features.Photos
         public async Task<IEnumerable<PhotoListModel>> GetPhotos(string userId)
             => await data.Photos
                 .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.CreatedOn)
                 .Select(c => new PhotoListModel
                 {
                     Id = c.Id,

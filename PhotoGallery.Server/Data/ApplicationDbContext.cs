@@ -27,6 +27,10 @@ namespace PhotoGallery.Server.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
+                .Entity<User>()
+                .OwnsOne(c => c.Profile);
+
+            builder
                 .Entity<Photo>()
                 .HasQueryFilter(c => !c.IsDeleted)
                 .HasOne(x => x.User)
@@ -43,7 +47,9 @@ namespace PhotoGallery.Server.Data
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(
+            bool acceptAllChangesOnSuccess, 
+            CancellationToken cancellationToken = default)
         {
             ApplyAuditInfo();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
