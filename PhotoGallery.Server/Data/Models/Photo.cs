@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PhotoGallery.Server.Data.Models.Base;
+using System.ComponentModel.DataAnnotations;
 using static PhotoGallery.Server.Data.Validation.Photo;
 
 namespace PhotoGallery.Server.Data.Models
 {
-    public class Photo
+    public class Photo : DeletableEntity
     {
         public int Id { get; set; }
 

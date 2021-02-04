@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PhotoGallery.Server.Features.Photos.Models;
-using PhotoGallery.Server.Infrastructure.Extensions;
+using PhotoGallery.Server.Infrastructure.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,15 +12,20 @@ namespace PhotoGallery.Server.Features.Photos
     {
         private readonly IPhotoService photoService;
 
-        public PhotosController(IPhotoService photoService)
+        private readonly ICurrentUserService currentUserService;
+
+        public PhotosController(
+            IPhotoService photoService,
+            ICurrentUserService currentUserService)
         {
             this.photoService = photoService;
+            this.currentUserService = currentUserService;
         }
 
         [HttpGet]
         public async Task<IEnumerable<PhotoListModel>> Get()
         {
-            return await photoService.GetPhotos(User.GetId());
+            return await photoService.GetPhotos(currentUserService.GetUserId());
         }
 
         [HttpGet]
@@ -33,7 +38,7 @@ namespace PhotoGallery.Server.Features.Photos
         [HttpPost]
         public async Task<ActionResult<int>> Create(CreatePhotoRequestModel model)
         {
-            var userId = User.GetId();
+            var userId = currentUserService.GetUserId();
 
             var id = await photoService.Create(
                 model.Description,
@@ -46,7 +51,7 @@ namespace PhotoGallery.Server.Features.Photos
         [HttpPut]
         public async Task<ActionResult> Update(UpdatePhotoRequestModel model)
         {
-            var userId = User.GetId();
+            var userId = currentUserService.GetUserId();
 
             var updated = await photoService.Update(
                 model.Id,
@@ -65,7 +70,7 @@ namespace PhotoGallery.Server.Features.Photos
         [Route("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var userId = User.GetId();
+            var userId = currentUserService.GetUserId();
 
             var deleted = await photoService.Delete(id, userId);
 

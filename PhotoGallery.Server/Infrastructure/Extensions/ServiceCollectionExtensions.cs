@@ -9,6 +9,7 @@ using PhotoGallery.Server.Data.Models;
 using PhotoGallery.Server.Features.Identity;
 using PhotoGallery.Server.Features.Photos;
 using PhotoGallery.Server.Infrastructure.Filters;
+using PhotoGallery.Server.Infrastructure.Services;
 using System.Text;
 
 namespace PhotoGallery.Server.Infrastructure.Extensions
@@ -81,6 +82,7 @@ namespace PhotoGallery.Server.Infrastructure.Extensions
         {
             return services
                 .AddTransient<IIdentityService, IdentityService>()
+                .AddScoped<ICurrentUserService, CurrentUserService>()
                 .AddTransient<IPhotoService, PhotoService>();
         }
 
